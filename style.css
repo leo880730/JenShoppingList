@@ -1,0 +1,158 @@
+body {
+  max-width: 400px;
+  height: 100vh;
+  margin: 0 auto;
+  width: 100%;
+  background: linear-gradient(110deg, #e6f2fc 52%, #cee7f6 52%);
+  background-repeat: no-repeat;
+  overflow-y: scroll;
+}
+
+.mb-3 {
+  margin-bottom: 0
+}
+
+.content__wrapper {
+  margin: 30px 0 10px;
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+  /* flex-wrap: wrap; */
+  opacity: 0;
+  animation: content-wrapper-anim 1500ms 500ms 1 forwards;
+}
+
+.form--custom {
+  /* width: auto; */
+}
+
+.checked {
+  color: #ccc;
+  text-decoration: line-through;
+  font-style: italic;
+}
+
+h4 {
+  text-align: center;
+  /* color: #252c74; */
+  position: relative;
+  top: -80px;
+  /* opacity: 0; */
+  animation: title-anim 1000ms 1500ms 1 forwards;
+}
+
+.form-check-input {
+  margin-top: 8px;
+}
+
+.fa {
+  margin: 0 5px;
+  color: #bbb;
+}
+
+li>label[for='todo'] {
+  width: 210px;
+  margin-bottom: 0.5rem;
+  font-size: 20px;
+}
+
+.delete-btn {
+  cursor: pointer;
+}
+
+#add-btn {
+  box-shadow: 3px 3px 0px #252c74;
+  border-radius: 8px;
+  border: 2px solid #252c74;
+  padding: 4px 12px;
+  color: #252c74;
+  background-color: #efefef;
+}
+
+.deco-container {
+  opacity: 0;
+  animation: deco-anim 1500ms 3000ms 1 forwards;
+}
+
+ul {
+  opacity: 0;
+  animation: deco-anim 1500ms 3000ms 1 forwards;
+}
+
+#blue-flower {
+  position: fixed;
+  top: 30%;
+  right: 2%;
+  /* zoom: 12%; */
+  height: 8%;
+  animation: blue-flower-anim 3s 3000ms infinite alternate linear;
+}
+
+#white-flower {
+  position: fixed;
+  bottom: 7%;
+  left: 5%;
+  /* zoom: 20%; */
+  height: 15%;
+  animation: white-flower-anim 1500ms 3000ms infinite alternate linear;
+}
+
+@keyframes title-anim {
+  0% {
+    top: -80px
+  }
+
+  30% {
+    top: 20px
+  }
+
+  70% {
+    top: -20px
+  }
+
+  100% {
+    top: 0
+  }
+}
+
+@keyframes content-wrapper-anim {
+  0% {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotateY(360deg);
+  }
+}
+
+@keyframes deco-anim {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes blue-flower-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes white-flower-anim {
+  0% {
+    bottom: 7%
+  }
+
+  100% {
+    bottom: 9%
+  }
+}
