@@ -41,10 +41,6 @@ h4 {
   animation: title-anim 1000ms 1500ms 1 forwards;
 }
 
-.form-check-input {
-  margin-top: 8px;
-}
-
 .fa {
   margin: 0 5px;
   color: #bbb;

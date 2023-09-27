@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>尖尖の日本国shopping list</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-wEmeIV1mKuiNpC+IOBjI7aAzPcEZeedi5yW5f2yOq55WWLwNGmvvx4Um1vskeMj0" crossorigin="anonymous">
+  <link rel="stylesheet" href="/shopping_list/style.css">
+</head>
+
+<body>
+  <div class="m-5">
+    <header class="mb-3">
+      <h4>尖尖の日本国shopping list</h4>
+      <div class="content__wrapper">
+        <input type="text" placeholder="add item" id="new-item" class="form--custom form-control me-2">
+        <button id="add-btn" class="btn btn-info">Add</button>
+      </div>
+    </header>
+    <ul id="shopping-list" class="list-unstyled">
+
+      <!-- display items here -->
+
+    </ul>
+    <div class="deco-container">
+      <img src="./images/f2@3x.png" class="deco-items" id="white-flower">
+      <img src="./images/f3@3x.png" class="deco-items" id="blue-flower">
+    </div>
+  </div>
+</body>
+<script src="https://kit.fontawesome.com/dfe50b8167.js" crossorigin="anonymous"></script>
+
+<script>
+  // 初始變數
+  let list = document.querySelector('#shopping-list')
+  let addBtn = document.querySelector('#add-btn')
+  let input = document.querySelector('#new-item')
+
+  // 資料
+  //add and delete data
+  let todoArr = []
+  let oldValue = window.localStorage.getItem('todo')
+  // console.log(oldValue)
+
+  if (oldValue != null) {
+    todoArr = JSON.parse(oldValue)
+    console.log(todoArr)
+  }
+
+  for (let todo of todoArr) {
+    addItem(todo)
+  }
+
+
+  //done data
+  let doneArr = []
+  let doneData = window.localStorage.getItem('done')
+  // console.log(doneData)
+
+  if (doneData != null) {
+    // doneArr.push(JSON.parse(doneData))
+    doneArr = JSON.parse(doneData)
+    console.log(doneArr)
+  }
+
+  for (let done of doneArr) {
+    doneItem(done)
+  }
+
+  function doneItem(done) {
+    // console.log(`${done}`);
+    document.getElementById(`${done}`).classList.toggle('checked')
+  }
+
+  function addItem(text) {
+    let newItem = document.createElement('li')
+    newItem.innerHTML = `
+      <label for="todo" id="${text}">${text}</label>
+      <i class="delete fa fa-trash delete-btn"></i>
+    `
+    list.appendChild(newItem)
+  }
+
+  addBtn.addEventListener('click', function () {
+    let inputValue = input.value
+    if (inputValue.length > 0) {
+      addItem(inputValue)
+      todoArr.push(inputValue)
+      let todoString = JSON.stringify(todoArr)
+      window.localStorage.setItem('todo', todoString)
+      input.value = ''
+    }
+  })
+
+  list.addEventListener('click', function (event) {
+    let target = event.target
+    console.log(target)
+    if (target.classList.contains('delete')) {
+      let parentElement = target.parentElement
+      // console.log(parentElement.firstElementChild.textContent)
+      // console.log(todoArr.indexOf(`${parentElement.firstElementChild.textContent}`))
+      todoArr.splice(todoArr.indexOf(`${parentElement.firstElementChild.textContent}`), 1)
+      parentElement.remove()
+      let todoString = JSON.stringify(todoArr)
+      window.localStorage.setItem('todo', todoString)
+    }
+
+    else if (target.tagName === 'LABEL') {
+      target.classList.toggle('checked')
+      if (target.classList.contains('checked')) {
+        doneArr.push(target.parentElement.firstElementChild.textContent)
+        // console.log(doneArr)
+        doneString = JSON.stringify(doneArr)
+        window.localStorage.setItem('done', doneString)
+      } else if (doneArr.indexOf(`${target.parentElement.firstElementChild.textContent}`) >= 0) {
+        // console.log(target.parentElement.firstElementChild.textContent)
+        doneArr.splice(doneArr.indexOf(`${target.parentElement.firstElementChild.textContent}`), 1)
+        // console.log(doneArr)
+        doneString = JSON.stringify(doneArr)
+        window.localStorage.setItem('done', doneString)
+      }
+    }
+  }
+  )
+</script>
+
+</html>
